@@ -1,5 +1,6 @@
 # AHB-LITE
 Verification of AHB-lite bus interface
+
 AHB-Lite is a subset of the full AHB specification for use in designs where only a single bus master is used. This can either be a simple single-master system, or a multi-layer AHB-Lite system where there is only one AHB master per layer.
 
 AHB-Lite addresses the requirements of high-performance synthesizable
