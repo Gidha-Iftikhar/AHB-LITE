@@ -13,7 +13,9 @@ initial begin
      #1 reset = 0;
      #10 reset = 1;
   end
-covergroup cg@(posedge clk);
+
+
+covergroup cg@(posedge clk);		// Adding coverage
 option.per_instance = 1;
  type_option.strobe = 1;
 coverpoint int_f.HADDR{ 
@@ -30,11 +32,11 @@ cg_inst=new();
 
 $display("Coverage of HADDR = %f",cg_inst.get_inst_coverage());
 end
-ahb_if int_f(clk,reset);
-wrapper wrap(int_f.dut);
-test t1(int_f.driver);
-assertions ass(int_f);
-bind wrapper assertions wp_ass(int_f.dut); 
+ahb_if int_f(clk,reset);		// Instantiating interference
+wrapper wrap(int_f.dut);		//instantiating wrapper
+test t1(int_f.driver);			// instantiating test program
+assertions ass(int_f);			// adding assertion
+bind wrapper assertions wp_ass(int_f.dut); // binding assertions
 
 
 endmodule

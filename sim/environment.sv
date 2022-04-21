@@ -37,7 +37,7 @@ task pre_test();
 drv.reset();
 endtask
 
-task test();
+task run();
   fork 
       	//gen.run();
       	drv.run();
@@ -56,12 +56,11 @@ task post_test();
 
 endtask
 
-task run();
+/*task run1();
 	pre_test();
 	test();
 	post_test();
 	
-endtask
+endtask*/
 
 endclass
-//`endif

@@ -16,10 +16,12 @@ program test(ahb_if intf);
     //create environment
  	$display("\n\n-----Test initial block------------\n\n");
      	env = new(intf);
-     	test_1();
-	test_2and3();
-	test_8to15();
-	test_16();
+     	test_2and3();
+////////////// UNCOMMENT FOLLOWING TEST TO RUN///////////
+	
+	//test_1();
+	//test_8to15();
+	//test_16();
 	
 	$stop;
   end
@@ -42,11 +44,8 @@ task test_1();
 env.gen.write_incr4_burst_hw(0,0);
 env.gen.pkt.HSEL_select.constraint_mode(0);
 env.gen.pkt.HSEL= 0;
-env.gen.run();
-/*if(env.mon.pkt.HWDATA == 32'b0)
-$display("TEST# 1 HAS PASSED");
-else
-$display("TEST# 1 HAS FAILED");*/
+env.run();
+
 endtask
 
 task test_2and3();
@@ -56,7 +55,7 @@ env.gen.write_single_burst_word(1,addr);
 env.gen.run();
 data1 = env.gen.pkt.HWDATA;
 env.gen.read_single_burst_word(1,addr);
-env.gen.run();
+env.run();
 data2 = env.gen.pkt.HRDATA;
 if(data1 == data2)
 $display("TEST# 2 HAS PASSED");
@@ -73,7 +72,7 @@ env.gen.write_wrap8_burst_byte(0,0);
 env.gen.write_incr8_burst_byte(0,0);
 env.gen.write_wrap16_burst_byte(0,0);
 env.gen.write_incr16_burst_byte(0,0);
-env.gen.run();
+env.run();
 
 endtask
 
@@ -82,13 +81,4 @@ env.gen.run();
 env.run();
 endtask
 
-
-task test();			//example test
-
-env.pre_test();
-env.gen.write_single_burst_byte(1,8'b00011001);
-env.gen.read_single_burst_byte(1,8'b00011001);
-env.mon.run();
-env.scb.run(); 
-endtask
 endprogram

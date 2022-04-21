@@ -20,12 +20,5 @@ constraint customized 	{
 			HADDR == cus_addr;
 			}
 	
-task display();
-/*$display("...............HADDR = %d............",HADDR);
-$display("...............HADDR = %d............",HWRITE);
-$display("...............HADDR = %d............",HBURST);
-$display("...............HADDR = %d............",cus_addr);
-$display("...............HADDR = %d............",HTRANS);
-$display("...............HADDR = %d............",HPROT);*/
-endtask
+
 endclass

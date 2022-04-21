@@ -31,7 +31,6 @@ localparam INCR16	= 111;
 
 task generate_burst(input [2:0] burst_type, input [2:0] burst_size, int wrap_or_incr_size, bit read_write,bit custom,logic [7:0] cus_addr);
 
-//$display("generating new burst");
 int addr;
 if(burst_type == 3'b010 || 3'b100 || 3'b110)
 begin 
@@ -55,13 +54,13 @@ for(int i=0;i<wrap_or_incr_size;i++)			// for WRAP bursts
 		if(custom)
 		begin
 		pkt.cus_addr = cus_addr;
-		pkt.random.constraint_mode(0);
-		pkt.customized.constraint_mode(1);
+		pkt.random.constraint_mode(0);			//RANDOMIZATION OF ADDRESS IS OFF
+		pkt.customized.constraint_mode(1);		//DIRECTED MODE IS ON
 		end
 		else
 		begin
-		pkt.random.constraint_mode(1);
-		pkt.customized.constraint_mode(0);
+		pkt.random.constraint_mode(1);			//RANDOMIZATION MODE IS ON
+		pkt.customized.constraint_mode(0);		//DIRECTED MODE IS OFF
 		end
 	addr 		= pkt.HADDR;
 	pkt.HTRANS 	= 2'b10;
@@ -78,7 +77,6 @@ for(int i=0;i<wrap_or_incr_size;i++)			// for WRAP bursts
 	gen2drive.put(pkt);
 	burst_count++;
 	end
-//$display("burst generated for address s");
 end
 else							// for INCR bursts
 begin
@@ -127,23 +125,18 @@ begin
 	pkt.HPROT 		<= 4'b0011;
 	gen2drive.put(pkt);
 	burst_count++;
-//$display("burst generated for address ");
+
 end
 
 end
-/*pkt.create_burst(burst_type,burst_size,wrap_or_incr_size,read_write);
-gen2drive.put(pkt);
-burst_count++;
-pkt.display();
-$display("\n\n---------- write single burst byte at HADDR = %d ---------\n\n",pkt.HADDR);	*/
-pkt.display();
+
 endtask
 
 /////////////// MAIN TASKS ////////////////////////
 task write_single_burst_byte(bit custom,logic [7:0] cus_addr);
 
 generate_burst(SINGLE,BYTE,0,1,custom,cus_addr);
-//$display("\n\n---------- write single burst byte at HADDR = %d ---------\n\n",pkt.HWDATA);	
+$display("\n\n---------- write single burst byte ---------\n\n");	
 endtask
 
 task write_incr_burst_byte(bit custom,logic [7:0] cus_addr);

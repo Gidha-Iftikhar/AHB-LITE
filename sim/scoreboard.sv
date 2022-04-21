@@ -25,12 +25,12 @@ end
 /////////////////////Read Operation//////////////////////
 else if(mem[pkt.HADDR] == pkt.HRDATA) 
 begin
-$display ("**************DATA MATCHED *************");
+$display ("************** DATA DOESN'T MATCH, TEST FAILED *************");
 burst_count++;
 end
 else 
 begin
-$display ("**************DATA MATCHED *************");
+$display ("**************DATA HAS MATCHED, TEST PASSED *************");
 error_count++;
 end
 end
