@@ -70,7 +70,7 @@
 
 
 module ahb3lite_sram1rw #(
-  parameter MEM_SIZE          = 0,   //Memory in Bytes
+  parameter MEM_SIZE          = 4,   //Memory in Bytes
   parameter MEM_DEPTH         = 256, //Memory depth
   parameter HADDR_SIZE        = 8,
   parameter HDATA_SIZE        = 32,
