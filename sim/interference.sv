@@ -1,5 +1,5 @@
-interface ahb_if(input HCLK);
-  logic				HRESETn;
+interface ahb_if(input logic HCLK, input logic HRESETn);
+ 
   logic                       	HSEL;
   logic      			HADDR;
   logic       			HWDATA;
@@ -12,6 +12,12 @@ interface ahb_if(input HCLK);
   logic                       	HREADYOUT;
   logic                       	HREADY;
   logic                       	HRESP;
+
+clocking master@(posedge HCLK);
+default input #1 output #1;
+output 	HSEL,HADDR,HWDATA,HWRITE,HSIZE,HBURST,HPROT,HTRANS,HREADY;
+input 	HREADYOUT,HRESP;
+endclocking
 
  modport dut(
       	input  		HRESETn,
@@ -30,34 +36,27 @@ interface ahb_if(input HCLK);
   	output          HRESP
   );
  modport driver(
-      	output  	HRESETn,
-      	output  	HCLK,
-      	output   	HSEL,
-  	output   	HADDR,
- 	output   	HWDATA,
-  	output          HWRITE,
-  	output       	HSIZE,
-  	output       	HBURST,
-  	output       	HPROT,
-  	output       	HTRANS,
-  	output          HREADY,
-	input 		HREADYOUT,
-	input          HRESP
+	input 		HCLK,
+      	input  		HRESETn,
+      	clocking	master
   );
 
- modport monitor(
+ modport monitor(//HSEL,HADDR,HWDATA,HWRITE,HSIZE,HBURST,HPROT,HTRANS,HREADY,HREADYOUT,HRESP
 	input  		HRESETn,
       	input  		HCLK,
-      	input   	HSEL,
-  	input   	HADDR,
- 	input   	HWDATA,
-  	input           HWRITE,
-  	input       	HSIZE,
-  	input       	HBURST,
-  	input       	HPROT,
-  	input       	HTRANS,
-  	input           HREADY,	
-	input 		HRDATA,
-	input 		HREADYOUT,
-	input          HRESP);
+      	input 		HSEL,
+	input		HWRITE,
+	input		HADDR,
+	input		HWDATA,
+	input		HSIZE,
+	input		HBURST,
+	input		HPROT,
+	input		HTRANS,
+	input		HREADY,
+
+	input		HRDATA,
+	input		HREADYOUT,
+	input		HRESP
+
+);
 endinterface

@@ -3,7 +3,7 @@ module wrapper (ahb_if.dut dut_if);
   
 
 ahb3lite_sram1rw #(
-  		.MEM_SIZE	(0),
+  		.MEM_SIZE	(4),
 		.MEM_DEPTH	(256),
 		.HADDR_SIZE	(8),
 		.HDATA_SIZE	(32),
