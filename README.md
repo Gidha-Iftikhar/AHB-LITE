@@ -9,10 +9,4 @@ Masters designed to the AHB-Lite interface specification are significantly simpl
 Any master that is already designed to the full AHB specification can be used in an AHB-Lite system with no modification. The majority of AHB slaves can be used interchangeably in either an AHB or AHB-Lite system. This is because AHB slaves that do not use either the Split or Retry response are automatically compatible with both the full AHB and the AHB-Lite specification. It is only existing AHB slaves that do use Split or Retry responses that require you to use an additional standard off-the-shelf wrapper in your AHB-Lite system.
 Any slave designed for use in an AHB-Lite system works in both a full AHB and an AHB-Lite design.
 
-# AHB-Lite Verification
-The verification plan and verification environment has been provided. All the tests included in verification plan has been tested and passed successfully
 
-# Software used
-Questasim has been used to simulate the environment
-Following image shows a successfull simulation of one test
-![image](https://user-images.githubusercontent.com/100277266/164532670-435c93a8-a632-4567-99e0-a333dd2ddad5.png)
